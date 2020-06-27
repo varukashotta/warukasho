@@ -1,10 +1,27 @@
 {
   "name": "warukasho",
-  "version": "0.1.0",
-  "private": true,
+  "version": "0.0.0-development",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "description": "A React component library",
+  "directories": {
+    "lib": "lib"
+  },
+  "keywords": [
+    "react",
+    "javascript",
+    "typescript"
+  ],
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/varukashotta/warukasho.git"
+  },
   "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
+    "@testing-library/jest-dom": "^5.11.0",
+    "@testing-library/react": "^10.4.3",
     "@testing-library/user-event": "^7.1.2",
     "@types/jest": "^24.0.0",
     "@types/node": "^12.0.0",
@@ -12,14 +29,23 @@
     "@types/react-dom": "^16.9.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-jss": "^10.3.0",
     "react-scripts": "3.4.1",
     "typescript": "~3.7.2"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "start-storybook -p 9009 -s public",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "build-storybook": "build-storybook",
+    "clean": "rm -rf ./lib",
+    "prebuild": "yarn clean",
+    "build": "tsc --build \"./tsconfig.json\"",
+    "copy-files": "copyfiles -u 1 src/style/base.css lib/",
+    "postbuild": "yarn run copy-files",
+    "lint": "eslint './src/**/*.{js,jsx,ts,tsx}'",
+    "lint:fix": "eslint --fix './src/**/*.{js,jsx,ts,tsx}'",
+    "semantic-release": "semantic-release"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -35,5 +61,26 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@storybook/addon-actions": "^5.3.19",
+    "@storybook/addon-knobs": "^5.3.19",
+    "@storybook/addon-links": "^5.3.19",
+    "@storybook/addons": "^5.3.19",
+    "@storybook/preset-create-react-app": "^3.1.2",
+    "@storybook/react": "^5.3.19",
+    "copyfiles": "^2.3.0",
+    "cz-conventional-changelog": "3.2.0",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "prettier": "^2.0.5",
+    "semantic-release": "^17.1.1",
+    "storybook-readme": "^5.0.8"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
